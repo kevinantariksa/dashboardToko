@@ -64,9 +64,10 @@ class BarangController extends Controller
      * @param  \App\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function edit(Barang $barang)
+    public function edit(Barang $barang,$id)
     {
-        //
+        $barang=Barang::where('id_barang',$id)->first();
+        return view('barang.editBarang',compact('barang',$barang));
     }
 
     /**
@@ -76,9 +77,19 @@ class BarangController extends Controller
      * @param  \App\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Barang $barang)
+    public function update(Request $request, Barang $barang, $id)
     {
-        //
+        $barang=Barang::where('id_barang',$id)->first();
+
+        $data = array('id_barang'=>$barang->id_barang,
+        'nama_barang'=> $request->input('nama_barang'),
+        'kode_barang'=> $request->input('kode_barang'),
+        'harga_modal'=> $request->input('harga_modal'),
+        'harga_jual'=> $request->input('harga_jual'),
+        'stok_barang'=> $request->input('stok')
+        );
+        Barang::where('id_barang',$id)->update($data);
+        return redirect('/barang')->with('info','Item Update Successfully');
     }
 
     /**
@@ -87,8 +98,22 @@ class BarangController extends Controller
      * @param  \App\Barang  $barang
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Barang $barang)
+    public function destroy(Barang $barang,$id)
     {
-        //
+        Barang::where('id_barang',$id)->delete();
+        return redirect('/barang')->with('info','Item Delete Successfully');
+    }
+    public function search(Request $request){
+        $temp=$request->input('search');
+        if(is_null($temp)){
+        dd('cannot be null, parameter pencarian hanya nama dan kode barang, please go back');
+        }
+        else{
+        $barang= Barang::where('barangs.nama_barang','like',$temp)
+                ->orWhere('barangs.kode_barang','like',$temp)
+                ->get();
+        }
+        //$barang=Barang::all();
+        return view('barang.tampilBarang',compact('barang',$barang));
     }
 }

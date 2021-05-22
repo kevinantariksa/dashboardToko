@@ -17,9 +17,10 @@
     
     <table class="table table-hover">
         <thead>
-            <form class="form-inline" method="GET" action="{{url('/fasilitasSearch')}}">
+            <form class="form-inline" method="GET" action="{{url('/barangSearch')}}">
                 <input type="text" class="form-control" name="search" placeholder="Enter Keywords" align="right">
                 <button type="submit" class="btn btn-secondary">Search</button>
+                <a href="{{url('/barang')}}" class="btn btn-danger">Back</a>
             </form>
             <tr>
                 <th scope="col">ID</th>

@@ -37,10 +37,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Admin-Barang
 Route::get('/barang','BarangController@index');
-Route::get('/updateBarang','BarangController@update');
+Route::get('/updtBarang/{id}','BarangController@update');
+Route::get('/updateBarang/{id}','BarangController@edit');
 Route::get('/tambahBarang','BarangController@create');
 Route::post('addBarang', 'BarangController@store');
-
+Route::get('/deleteBarang/{id}','BarangController@destroy');
+Route::get('/barangSearch','BarangController@search');
 
 //Admin-Transaksi
 Route::get('/report','TransaksiController@index'); //Report based on transaksi

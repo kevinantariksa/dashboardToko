@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <label for="exampleInputEmail2">Kode Barang: </label>
-                <input type="text" min="1" class="form-control" name="kode_barang" placeholder="Enter Facility">
+                <input type="text" min="1" class="form-control" name="kode_barang" placeholder="Kode Barang">
             </div>
 
             <div class="form-group">
@@ -25,7 +25,7 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text">Rp</span>
                     </div>
-                    <input name="harga_modal" type="number" min="100" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <input name="harga_modal" type="number" min="1" class="form-control" aria-label="Amount (to the nearest dollar)">
                 </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text">Rp</span>
                     </div>
-                    <input name="harga_jual" type="number" min="100" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <input name="harga_jual" type="number" min="1" class="form-control" aria-label="Amount (to the nearest dollar)">
                 </div>
                 </div>
             </div>
