@@ -17,6 +17,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/tregister', function () {
+    return view('register2');
+});
+
+
+Route::get('/tregister','HomeController@getRegister');
+
+/** Fallback Route */
+Route::fallback(function () {
+    /** This will check for the 404 view page unders /resources/views/errors/404 route */
+    return view('errors.404');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//Admin-Barang
+Route::get('/barang','BarangController@index');
+Route::get('/updateBarang','BarangController@update');
+Route::get('/tambahBarang','BarangController@create');
+Route::post('addBarang', 'BarangController@store');
+
+
+//Admin-Transaksi
+Route::get('/report','TransaksiController@index'); //Report based on transaksi
+
+//Admin-Transaksi Record
+Route::get('/transaksi','RecordTransaksiController@index');
