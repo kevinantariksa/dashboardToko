@@ -37,15 +37,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Admin-Barang
 Route::get('/barang','BarangController@index');
-Route::get('/updtBarang/{id}','BarangController@update');
-Route::get('/updateBarang/{id}','BarangController@edit');
-Route::get('/tambahBarang','BarangController@create');
-Route::post('addBarang', 'BarangController@store');
-Route::get('/deleteBarang/{id}','BarangController@destroy');
-Route::get('/barangSearch','BarangController@search');
+Route::get('/tambahBarang','BarangController@create'); //halaman create
+Route::post('addBarang', 'BarangController@store'); //enter DB
+Route::get('/updtBarang/{id}','BarangController@update'); //halaman edit
+Route::get('/updateBarang/{id}','BarangController@edit'); //edit table
+Route::get('/deleteBarang/{id}','BarangController@destroy'); //delete
+Route::get('/barangSearch','BarangController@search'); //search
 
 //Admin-Transaksi
-Route::get('/report','TransaksiController@index'); //Report based on transaksi
+Route::get('/report','RecordTransaksiController@index'); //Report based on transaksi
 
 //Admin-Transaksi Record
-Route::get('/transaksi','RecordTransaksiController@index');
+Route::get('/transaksi','TransaksiController@index');
+Route::get('/transaksiBaru','TransaksiController@create');//halaman trns
+Route::post('/storeTransaksi','TransaksiController@store');//tabel
+Route::get('/updtTransaksi/{id}','TransaksiController@update'); //halaman edit
+Route::get('/updateTransaksi/{id}','TransaksiController@edit'); //edit table
+Route::get('/deleteTransaksi/{id}','TransaksiController@destroy'); //delete
+Route::get('/searchTransaksi','TransaksiController@search'); //search

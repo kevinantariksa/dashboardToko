@@ -44,9 +44,9 @@
                     <td>
                         @if ($brg->stok_barang>=1)
                             {{$brg->stok_barang}}
-                            <a class="btn btn-success text-light" data-toggle="modal" id="smallButton" data-target="#smallModal"
+                            <!-- <a class="btn btn-success text-light" data-toggle="modal" id="smallButton" data-target="#smallModal"
                                 data-attr='{{url("/")}}' title="Create a project"> <i class="fas fa-plus-circle"></i>
-                            </a>
+                            </a> -->
                         @else
                             Unavailable
                         @endif
@@ -64,7 +64,7 @@
 </div>
 
 <script>
-     $(document).on('click', '#smallButton', function(event) {
+    $(document).on('click', '#smallButton', function(event) {
             event.preventDefault();
             let href = $(this).attr('data-attr');
             $.ajax({

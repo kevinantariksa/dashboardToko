@@ -19,6 +19,8 @@ class CreateTransaksisTable extends Migration
             $table->integer('nomor_nota');
             $table->integer('nilai_transaksi');
             $table->integer('profit');
+            $table->varchar('keterangan');
+            $table->integer('flag_report');
 
             $table->timestamps();
         });
