@@ -43,9 +43,9 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        
+        dd($request);
         //Simpan Transaksi lalu record Transaksi
-        $fct=new Transaksi;
+        $fct = new Transaksi;
         $fct->tanggal_transaksi = Carbon::now();
         $fct->nomor_nota = $request->input('nomor_nota');
         $fct->nilai_transaksi = $request->input('nilai_transaksi');
@@ -54,16 +54,27 @@ class TransaksiController extends Controller
         $fct->status = $request->input('status');
         $fct->save();
         
-        $id=Transaksi::latest('id_transaksi')->first();
-        $input = new RecordTransaksi;
-        $input->id_transaksi = $id->id_transaksi;
-        $input['id_barang']= $request->input('barang');
-        $input['jumlah_barang'] = $request->input('jumlah');
-        $input->total_harga = $request->input('nilai_transaksi');
-        $input->nomor_nota = $request->input('nomor_nota');
-        $input->tanggal_transaksi = Carbon::now();
-        //dd($request);
-        $input->save();
+        $loop = $request->barang;
+        $latest = Transaksi::latest('id_transaksi')->first();
+        foreach($loop as $i){
+            $values[]=[
+                'id_transaksi'=>$latest,
+                'id_barang'=> $request->input('barang'),
+                'jumlah_barang' => $request->input('jumlah'),
+                'total_harga' => $request->input('nilai_transaksi'),
+                'nomor_nota' => $request->input('nomor_nota'),
+                'tanggal_transaksi' => Carbon::now()
+            ];
+            $total=$request->input('stok') - $request->input('jumlah');
+            $data = array(
+                'id_barang'=>$request->input('barang'),
+                'stok_barang'=> $total
+            );
+            Barang::where('id_barang',$id)->update($data);
+        }
+        DB::table('record_transaksis')->insert($values); 
+        
+        
 
         $transaksi=Transaksi::get();
         $recordTransaksi=RecordTransaksi::get();
