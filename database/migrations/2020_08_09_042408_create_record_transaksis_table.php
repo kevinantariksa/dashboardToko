@@ -16,7 +16,7 @@ class CreateRecordTransaksisTable extends Migration
         Schema::create('record_transaksis', function (Blueprint $table) {
             $table->id('id_recordtransaksi');
             $table->integer('id_transaksi');
-            $table->integer('id_barang');
+            $table->text('id_barang');
             $table->integer('jumlah_barang');
             $table->integer('total_harga');
             $table->integer('nomor_nota');

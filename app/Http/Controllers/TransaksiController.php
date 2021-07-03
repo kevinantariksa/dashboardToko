@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Transaksi;
 use App\RecordTransaksi;
 use App\Barang;
@@ -43,37 +43,44 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //dd($request);
         //Simpan Transaksi lalu record Transaksi
+
         $fct = new Transaksi;
         $fct->tanggal_transaksi = Carbon::now();
         $fct->nomor_nota = $request->input('nomor_nota');
-        $fct->nilai_transaksi = $request->input('nilai_transaksi');
-        $fct->profit = $request->input('nilai_transaksi');
+        $fct->nilai_transaksi = $request->input('total');
+        $fct->profit = $request->input('profit');
         $fct->keterangan = $request->input('keterangan');
         $fct->status = $request->input('status');
-        $fct->save();
+        //$fct->save();
         
-        $loop = $request->barang;
+        $arr_length = count($request->nama_barang);
         $latest = Transaksi::latest('id_transaksi')->first();
-        foreach($loop as $i){
+        
+        for($i=0; $i<$arr_length;$i++){
+            $nama_brg = $request->input('nama_barang')[$i];
+            $jml=$request->input('jumlah')[$i];
             $values[]=[
                 'id_transaksi'=>$latest,
-                'id_barang'=> $request->input('barang'),
-                'jumlah_barang' => $request->input('jumlah'),
-                'total_harga' => $request->input('nilai_transaksi'),
+                'id_barang'=> $nama_brg,
+                'jumlah_barang' => $jml,
+                'total_harga' => $request->input('total'),
                 'nomor_nota' => $request->input('nomor_nota'),
                 'tanggal_transaksi' => Carbon::now()
             ];
-            $total=$request->input('stok') - $request->input('jumlah');
+            $final_stok=$request->input('stok')[$i] - $jml;
+           // dd($final_stok);
             $data = array(
                 'id_barang'=>$request->input('barang'),
-                'stok_barang'=> $total
+                'stok_barang'=> $final_stok
             );
             Barang::where('id_barang',$id)->update($data);
+            
         }
-        DB::table('record_transaksis')->insert($values); 
-        
+        dd($values);
+        //RecordTransaksi::insert($values);
+        //DB::table('record_transaksis')->insert($values);
         
 
         $transaksi=Transaksi::get();
