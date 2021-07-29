@@ -37,7 +37,7 @@
             <?php foreach ($transaksi as $trs): ?>
                 <tr class="table-light">
                     <th>{{$trs->id_transaksi}}</th>
-                    <td>{{$trs->tanggal_transaksi}}</td>
+                    <td>{{$trs->tanggal_transaksi12}}</td>
                     <td>{{$trs->nomor_nota}}</td>
                     <td>Rp {{number_format($trs->nilai_transaksi,2)}}</td>
                     <td>{{$trs->status}}</td>

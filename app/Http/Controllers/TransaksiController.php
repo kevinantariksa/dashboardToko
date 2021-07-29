@@ -17,7 +17,7 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $transaksi=Transaksi::get();
+        $transaksi=Transaksi::orderByDesc('id_transaksi')->get();
         $recordTransaksi=RecordTransaksi::get();
         //dd($transaksi);
 
@@ -53,16 +53,19 @@ class TransaksiController extends Controller
         $fct->profit = $request->input('profit');
         $fct->keterangan = $request->input('keterangan');
         $fct->status = $request->input('status');
-        //$fct->save();
+        $fct->save();
         
         $arr_length = count($request->nama_barang);
-        $latest = Transaksi::latest('id_transaksi')->first();
+        $latest = DB::select('SELECT id_transaksi FROM transaksis ORDER BY id_transaksi DESC LIMIT 1');
         
+        // /dd($latest[0]->id_transaksi);
         for($i=0; $i<$arr_length;$i++){
             $nama_brg = $request->input('nama_barang')[$i];
             $jml=$request->input('jumlah')[$i];
+            print_r($request->input('stok')[$i]);
+            $final_stok=0;    
             $values[]=[
-                'id_transaksi'=>$latest,
+                'id_transaksi'=>$latest[0]->id_transaksi,
                 'id_barang'=> $nama_brg,
                 'jumlah_barang' => $jml,
                 'total_harga' => $request->input('total'),
@@ -70,20 +73,14 @@ class TransaksiController extends Controller
                 'tanggal_transaksi' => Carbon::now()
             ];
             $final_stok=$request->input('stok')[$i] - $jml;
-           // dd($final_stok);
             $data = array(
-                'id_barang'=>$request->input('barang'),
                 'stok_barang'=> $final_stok
             );
-            Barang::where('id_barang',$id)->update($data);
-            
+            Barang::where('nama_barang',$nama_brg)->update($data);
         }
-        dd($values);
-        //RecordTransaksi::insert($values);
-        //DB::table('record_transaksis')->insert($values);
-        
+        RecordTransaksi::insert($values);        
 
-        $transaksi=Transaksi::get();
+        $transaksi=Transaksi::orderByDesc('id_transaksi')->get();
         $recordTransaksi=RecordTransaksi::get();
         //dd($transaksi);
 
@@ -107,9 +104,10 @@ class TransaksiController extends Controller
      * @param  \App\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksi $transaksi)
+    public function edit(Transaksi $transaksi, $id)
     {
-        //
+        $transaksi=Transaksi::where('id_transaksi',$id)->first();
+        return view('barang.editBarang',compact('barang',$barang));
     }
 
     /**

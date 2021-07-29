@@ -158,10 +158,10 @@ function addItemToCart(title, price, modal,stok) {
             <input class="cart-item-title" type="hidden" name="nama_barang[]" value="${title}">
         </div>
         <span class="cart-price cart-column">${price}</span>
-        <input type="hidden" class="shop-stok" name="stok[]" value={{$brg->stok_barang}}>
+        <input type="hidden" class="shop-stok" name="stok[]" value="${stok}">
         <input type="hidden" class="cart-modal" name="modal[]"  value="${modal}">
         <div class="cart-quantity cart-column">
-            <input class="cart-quantity-input" type="number" name="jumlah[]" value="1">
+            <input class="cart-quantity-input" type="number" name="jumlah[]" value="1" max="${stok}">
             <button class="btn btn-danger" type="button">REMOVE</button>
         </div>`
     cartRow.innerHTML = cartRowContents
