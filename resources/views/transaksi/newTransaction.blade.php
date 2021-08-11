@@ -58,7 +58,12 @@
 
             <div class="form-group">
                 <label class="control-label">Pembayaran</label>
-                <input name="status" type="text"  class="form-control" placeholder="misal: Lunas/DP" >
+                <select id="cars" name="status" class="form-control">
+                    <option value="cash">cash</option>
+                    <option value="debit">debit</option>
+                    <option value="kredit">kredit</option>
+                    <option value="dp">dp</option>
+                </select>
             </div>
 
             <div class="form-group">

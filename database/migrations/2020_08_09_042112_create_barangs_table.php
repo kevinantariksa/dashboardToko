@@ -17,8 +17,11 @@ class CreateBarangsTable extends Migration
             $table->id('id_barang');
             $table->char('nama_barang', 150);
             $table->char('kode_barang', 100);
+            $table->char('jenis_barang', 100);
+            $table->char('merek_barang', 100);
             $table->bigInteger('harga_modal');
-            $table->bigInteger('harga_jual');
+            $table->float('harga_jual2');
+            $table->float('harga_jual1');
             $table->bigInteger('stok_barang');
             $table->timestamps();
         });
