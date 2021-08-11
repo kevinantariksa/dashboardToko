@@ -20,12 +20,12 @@
 
             <div class="form-group">
                 <label for="exampleInputEmail2">Satuan: </label>
-                <!-- <select name="province" id="province" class="form-control">
+                {{-- <select name="province" id="province" class="form-control">
                     <option value="">== Select Province ==</option>
                     @foreach ($provinces as $id => $name)
                         <option value="{{ $id }}">{{ $name }}</option>
                     @endforeach
-                </select> -->
+                </select> --}}
             </div>
 
             <div class="form-group">
