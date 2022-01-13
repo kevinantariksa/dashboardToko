@@ -14,7 +14,8 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        //
+        $satuan=Satuan::orderByDesc('id')->get();
+        return view('transaksi.tampilTransaksi',['transaksi'=>$transaksi,'recordTransaksi'=>$recordTransaksi]);
     }
 
     /**
