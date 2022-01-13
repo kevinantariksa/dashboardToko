@@ -16,7 +16,7 @@ class CreateCabangsTable extends Migration
         Schema::create('cabangs', function (Blueprint $table) {
             $table->id();
             $table->text('nama_cabang');
-            $table->
+            $table->float('total_penjualan');
 
             $table->timestamps();
         });

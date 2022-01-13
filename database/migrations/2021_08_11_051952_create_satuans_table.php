@@ -16,8 +16,8 @@ class CreateSatuansTable extends Migration
         Schema::create('satuans', function (Blueprint $table) {
             $table->id();
             $table->text('nama_satuan');
-            $table->float('ukuran_satuan');
-            $table->text('konversi_satuan',100)->nullable();
+            $table->float('nilai_satuan');
+            $table->text('konversi_terhadap_satuan',100)->nullable();
             $table->timestamps();
         });
     }
